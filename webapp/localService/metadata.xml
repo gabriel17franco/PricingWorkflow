@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+    <edmx:Reference Uri="https://apfs4qqas.arauco.cl:44344/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://apfs4qqas.arauco.cl:44344/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_CAPABILITIES',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="Org.OData.Capabilities.V1" Alias="Capabilities"/>
+    </edmx:Reference>
+    <edmx:Reference Uri="https://apfs4qqas.arauco.cl:44344/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value" xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication"/>
+    </edmx:Reference>
+    <edmx:DataServices m:DataServiceVersion="2.0">
+        <Schema Namespace="ZP_PRICING_BR_SRV" xml:lang="es" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+            <EntityType Name="JSON_STANDARD_COMMUNICATION" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Action"/>
+                </Key>
+                <Property Name="Action" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="StructureName" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="JsonData" Type="Edm.String" Nullable="false" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+                <Property Name="AutoConvert" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/>
+            </EntityType>
+            <EntityType Name="ZC_PRICING_BR01Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="SalesOrg"/>
+                    <PropertyRef Name="DistrChannel"/>
+                    <PropertyRef Name="Plant"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Número de material"/>
+                <Property Name="SalesOrg" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Organización ventas" sap:quickinfo="Organización de ventas"/>
+                <Property Name="DistrChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Canal distribución" sap:quickinfo="Canal de distribución"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="Spart" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Sector"/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Texto breve material" sap:quickinfo="Texto breve de material"/>
+                <Property Name="PriceGroup" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Gr.precio materiales" sap:quickinfo="Grupo de precios de material"/>
+            </EntityType>
+            <EntityType Name="ZC_PRICING_BR02Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                    <PropertyRef Name="Plant"/>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="ValidFrom"/>
+                    <PropertyRef Name="ValidTo"/>
+                    <PropertyRef Name="PricingId"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Sociedad"/>
+                <Property Name="Plant" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:text="MaterialDescription" sap:label="Material" sap:quickinfo="Número de material"/>
+                <Property Name="ValidFrom" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Válido de" sap:quickinfo="Fecha inicio validez"/>
+                <Property Name="ValidTo" Type="Edm.DateTime" Nullable="false" Precision="0" sap:display-format="Date" sap:label="Fin de validez" sap:quickinfo="Fecha fin validez"/>
+                <Property Name="PricingId" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label=""/>
+                <Property Name="SalesOrg" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Organización ventas" sap:quickinfo="Organización de ventas"/>
+                <Property Name="DistrChannel" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Canal distribución" sap:quickinfo="Canal de distribución"/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Texto breve material" sap:quickinfo="Texto breve de material"/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Moneda" sap:quickinfo="Clave de moneda" sap:semantics="currency-code"/>
+                <Property Name="Percentual" Type="Edm.String" MaxLength="5" sap:label="Moneda" sap:quickinfo="Clave de moneda" sap:semantics="currency-code"/>
+                <Property Name="ZzsubustratoDesc" Type="Edm.String" MaxLength="70" sap:label="" sap:quickinfo="Valor de la característica"/>
+                <Property Name="Zzsubustrato" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzsubustratoPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzdensidadeDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzdensidade" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzdensidadePerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZztecnologiaDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zztecnologia" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZztecnologiaPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzrevestimentoDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzrevestimento" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzrevestimentoPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzespessuraDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzespessura" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzespessuraPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzemissaoDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzemissao" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzemissaoPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzpeliculaDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzpelicula" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzpeliculaPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZzpalletizacaoDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zzpalletizacao" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZzpalletizacaoPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZqualidadeDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zqualidade" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZQualidadePerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZforalinhaDesc" Type="Edm.String" MaxLength="70" sap:display-format="UpperCase" sap:label=""/>
+                <Property Name="Zforalinha" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZforalinhaPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZfxtexturaDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zfxtextura" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZfxtexturaPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="ZfxpadraoDesc" Type="Edm.String" MaxLength="70" sap:label=""/>
+                <Property Name="Zfxpadrao" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ZfxpadraoPerc" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="CommercialAmount" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="CommercialMeasure" Type="Edm.String" MaxLength="3" sap:label="" sap:quickinfo="Unidad de medida para la condición" sap:semantics="unit-of-measure"/>
+                <Property Name="CreatedByName" Type="Edm.String" MaxLength="80" sap:label="" sap:quickinfo="Nombre completo de la persona"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:text="CreatedByName" sap:label="Fecha"/>
+            </EntityType>
+            <EntityType Name="ZC_PRICING_BR06Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="SalesOrg"/>
+                    <PropertyRef Name="DistrChannel"/>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="SimulationId"/>
+                </Key>
+                <Property Name="SalesOrg" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Organización ventas" sap:quickinfo="Organización de ventas"/>
+                <Property Name="DistrChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Canal distribución" sap:quickinfo="Canal de distribución"/>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:text="MaterialDescription" sap:label="Material" sap:quickinfo="Número de material"/>
+                <Property Name="SimulationId" Type="Edm.String" Nullable="false" MaxLength="10" sap:display-format="NonNegative" sap:label=""/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Texto breve material" sap:quickinfo="Texto breve de material"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="Customer" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase" sap:text="CustomerName" sap:label="Cliente" sap:quickinfo="Número de cliente"/>
+                <Property Name="CustomerName" Type="Edm.String" MaxLength="80" sap:label="Nombre de cliente"/>
+                <Property Name="Amount" Type="Edm.Decimal" Precision="12" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="Currency" Type="Edm.String" MaxLength="5" sap:label="Moneda" sap:quickinfo="Clave de moneda" sap:semantics="currency-code"/>
+                <Property Name="Measure" Type="Edm.String" MaxLength="3" sap:label="Unidad medida base" sap:quickinfo="Unidad de medida base" sap:semantics="unit-of-measure"/>
+                <Property Name="DocType" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="DocTypeDesc" sap:label="Clase doc.ventas" sap:quickinfo="Clase de documento de ventas"/>
+                <Property Name="DocTypeDesc" Type="Edm.String" MaxLength="20" sap:label="" sap:quickinfo="Descripción de clase de documento de ventas"/>
+                <Property Name="PaymentCond" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:text="PaymentCondDesc" sap:label="Condiciones de pago" sap:quickinfo="Clave de condiciones de pago"/>
+                <Property Name="PaymentCondDesc" Type="Edm.String" MaxLength="30" sap:label="Denominación" sap:quickinfo="Denominación de las condiciones de pago"/>
+                <Property Name="Ipva" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Isic" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Ists" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Bco1" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Bpi1" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Percentual" sap:label=""/>
+                <Property Name="Icmi" Type="Edm.Decimal" Precision="14" Scale="3" sap:unit="Currency" sap:label=""/>
+                <Property Name="ValidIn" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:label="Válido el" sap:quickinfo="Fecha válida el"/>
+                <Property Name="CreatedAt" Type="Edm.DateTime" Precision="0" sap:display-format="Date" sap:text="CreatedByName" sap:label="" sap:quickinfo="Fecha de creación"/>
+                <Property Name="CreatedByName" Type="Edm.String" MaxLength="80" sap:label="Nombre completo" sap:quickinfo="Nombre completo de la persona"/>
+                <Property Name="Percentual" Type="Edm.String" MaxLength="5" sap:label="Moneda" sap:quickinfo="Clave de moneda" sap:semantics="currency-code"/>
+            </EntityType>
+            <EntityType Name="ZC_PRICING_BR07Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="SalesOrg"/>
+                    <PropertyRef Name="DistrChannel"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Número de material"/>
+                <Property Name="SalesOrg" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Organización ventas" sap:quickinfo="Organización de ventas"/>
+                <Property Name="DistrChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Canal distribución" sap:quickinfo="Canal de distribución"/>
+                <Property Name="Spart" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Sector"/>
+                <Property Name="MaterialDescription" Type="Edm.String" MaxLength="40" sap:label="Texto breve material" sap:quickinfo="Texto breve de material"/>
+                <Property Name="PriceGroup" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Gr.precio materiales" sap:quickinfo="Grupo de precios de material"/>
+            </EntityType>
+            <EntityType Name="ZI_PRICING_BR01Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="CompanyCode"/>
+                    <PropertyRef Name="ConditionName"/>
+                </Key>
+                <Property Name="CompanyCode" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Sociedad"/>
+                <Property Name="ConditionName" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Clase de condición"/>
+                <Property Name="Characteristic" Type="Edm.String" MaxLength="30" sap:label=""/>
+                <Property Name="ConditionType" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Carácter 1" sap:quickinfo="Indicador de una posición"/>
+                <Property Name="CharIndex" Type="Edm.Byte" sap:label="int" sap:quickinfo="Dummy para B20 int1 (siempre local)"/>
+            </EntityType>
+            <EntityType Name="ZI_PRICING_BR04Type" sap:content-version="1">
+                <Key>
+                    <PropertyRef Name="Material"/>
+                    <PropertyRef Name="SalesOrg"/>
+                    <PropertyRef Name="DistrChannel"/>
+                </Key>
+                <Property Name="Material" Type="Edm.String" Nullable="false" MaxLength="40" sap:display-format="UpperCase" sap:label="Material" sap:quickinfo="Número de material"/>
+                <Property Name="SalesOrg" Type="Edm.String" Nullable="false" MaxLength="4" sap:display-format="UpperCase" sap:label="Organización ventas" sap:quickinfo="Organización de ventas"/>
+                <Property Name="DistrChannel" Type="Edm.String" Nullable="false" MaxLength="2" sap:display-format="UpperCase" sap:label="Canal distribución" sap:quickinfo="Canal de distribución"/>
+                <Property Name="Plant" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Centro"/>
+                <Property Name="CompanyCode" Type="Edm.String" MaxLength="4" sap:display-format="UpperCase" sap:label="Sociedad"/>
+                <Property Name="PriceGroup" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="Gr.precio materiales" sap:quickinfo="Grupo de precios de material"/>
+                <Property Name="MerchandiseGroup" Type="Edm.String" MaxLength="9" sap:display-format="UpperCase" sap:label="Grupo de artículos"/>
+                <Property Name="CharacteristicName" Type="Edm.String" MaxLength="30" sap:display-format="UpperCase" sap:label="Nombre campo"/>
+                <Property Name="CharacteristicValue" Type="Edm.String" MaxLength="70" sap:label="Denom.valor caract." sap:quickinfo="Denominación valor de característica"/>
+                <Property Name="CharacteristicNumValue" Type="Edm.Double" sap:label="Valor de" sap:quickinfo="Valor de coma flotante interno de"/>
+                <Property Name="TaxM1" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase" sap:label="Clasificación fiscal" sap:quickinfo="Clasificación fiscal para el material"/>
+                <Property Name="Mwsk1" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase"/>
+                <Property Name="MaterialUse" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"/>
+                <Property Name="StandardRange" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="" sap:quickinfo="Componente del número de versión"/>
+                <Property Name="TextureRange" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="" sap:quickinfo="Componente del número de versión"/>
+                <Property Name="isCustomField" Type="Edm.String" MaxLength="1" sap:display-format="UpperCase"/>
+                <Property Name="CustomFieldName" Type="Edm.String" MaxLength="10" sap:display-format="UpperCase"/>
+                <Property Name="CustomFieldValue" Type="Edm.String" MaxLength="2" sap:display-format="UpperCase" sap:label="" sap:quickinfo="Componente del número de versión"/>
+            </EntityType>
+            <EntityContainer Name="ZP_PRICING_BR_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx">
+                <EntitySet Name="JSON_STANDARD_COMMUNICATIONSet" EntityType="ZP_PRICING_BR_SRV.JSON_STANDARD_COMMUNICATION" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:pageable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PRICING_BR01" EntityType="ZP_PRICING_BR_SRV.ZC_PRICING_BR01Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PRICING_BR02" EntityType="ZP_PRICING_BR_SRV.ZC_PRICING_BR02Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PRICING_BR06" EntityType="ZP_PRICING_BR_SRV.ZC_PRICING_BR06Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZC_PRICING_BR07" EntityType="ZP_PRICING_BR_SRV.ZC_PRICING_BR07Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_PRICING_BR01" EntityType="ZP_PRICING_BR_SRV.ZI_PRICING_BR01Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+                <EntitySet Name="ZI_PRICING_BR04" EntityType="ZP_PRICING_BR_SRV.ZI_PRICING_BR04Type" sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"/>
+            </EntityContainer>
+            <atom:link rel="self" href="https://apfs4qqas.arauco.cl:44344/sap/opu/odata/sap/ZP_PRICING_BR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+            <atom:link rel="latest-version" href="https://apfs4qqas.arauco.cl:44344/sap/opu/odata/sap/ZP_PRICING_BR_SRV/$metadata" xmlns:atom="http://www.w3.org/2005/Atom"/>
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>
