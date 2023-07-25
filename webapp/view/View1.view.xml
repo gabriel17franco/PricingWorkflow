@@ -1,7 +1,96 @@
 <mvc:View controllerName="pricingworkflow.controller.View1"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
-    xmlns="sap.m">
-    <Page id="page" title="{i18n>title}">
-        <content />
+    xmlns="sap.m"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:core="sap.ui.core"
+    xmlns:s="sap.suite.ui.commons">
+    <Page id="page" title="Aprovação de preços">
+        <Panel expandable="true" expanded="true" headerText="Visão geral" width="auto" class="sapUiResponsiveMargin">
+            <content>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop" header="Em andamento" subheader="Total de aprovações">
+                    <TileContent>
+                        <NumericContent value="3" valueColor="Critical" withMargin="false" icon="sap-icon://pending"/>
+		            </TileContent>
+	            </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="1º - 2º Nível">
+                    <TileContent footer="Aguardando aprovação">
+                        <NumericContent value="1" withMargin="false"/>
+		            </TileContent>
+	            </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="3º - 4º Nível">
+                    <TileContent footer="Aguardando aprovação">
+                        <NumericContent value="1" withMargin="false" />
+		            </TileContent>
+	            </GenericTile>
+                <GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="5º Nível">
+                    <TileContent footer="Aguardando aprovação">
+                        <NumericContent value="1" valueColor="Good" withMargin="false" />
+		            </TileContent>
+	            </GenericTile>
+            </content>
+        </Panel>
+        <Panel expandable="true" expanded="true" width="auto" headerText="Listagem de aprovações" class="sapUiResponsiveMargin">
+            <content>
+                <FlexBox direction="Column" class="sapUiSmallMarginTopBottom">
+                    <items>
+                        <!-- <Label text="Status:"/> -->
+                        <SegmentedButton selectedKey="loading" selectionChange="onChangeFilters">
+                            <items>
+                                <SegmentedButtonItem text="Em andamento" key="loading" icon="sap-icon://pending" />
+                                <SegmentedButtonItem text="Aprovado"     key="success" icon="sap-icon://thumb-up" />
+                                <SegmentedButtonItem text="Reprovado"    key="cancel"  icon="sap-icon://thumb-down"/>
+                            </items>
+				        </SegmentedButton>
+                        <!-- <Label text="Níveis de aprovação:" class="sapUiSmallMarginTop"/>                            
+                        <MultiComboBox
+                            selectionChange="handleSelectionChange"
+                            width="500px" selectedKeys="1,2,3,4,5">
+                            <core:Item key="1" text="Nível 1"/>
+                            <core:Item key="2" text="Nível 2"/>
+                            <core:Item key="3" text="Nível 3"/>
+                            <core:Item key="4" text="Nível 4"/>
+                            <core:Item key="5" text="Nível 5"/>
+                        </MultiComboBox> -->
+                    </items>
+                </FlexBox>
+                <smartTable:SmartTable entitySet="ZC_PRICING_BR02" smartFilterId="smartFilterBar" tableType="AnalyticalTable" 
+			    useVariantManagement="false" header="Entradas" persistencyKey="SmartTableAnalytical_Explored" enableAutoBinding="true"
+			    demandPopin="true" class="sapUiResponsiveContentPadding" initiallyVisibleFields="" useTablePersonalisation="true"
+                enableExport="false" >
+                <Table id="ApprovalTable">
+                    <columns>
+                        <Column>
+                            <customData>
+						        <core:CustomData key="p13nData" value='\{"columnKey": "Material", "columnIndex": "1", "leadingProperty": "Material"}' />
+                            </customData>
+                            <Text text="Progresso"/>
+                        </Column>
+                        <Column>
+                            <customData>
+						        <core:CustomData key="p13nData" value='\{"columnKey": "Plant", "columnIndex": "2", "leadingProperty": "Plant"}' />
+                            </customData>
+                            <Text text="Nível aprovação"/>
+                        </Column>
+                    </columns>
+                    <items>
+                        <ColumnListItem>
+                            <cells>
+                                <s:MicroProcessFlow renderType="NoWrap">
+                                    <s:content>
+                                        <s:MicroProcessFlowItem state="Success" icon="sap-icon://thumb-up"/>
+                                        <s:MicroProcessFlowItem state="Success" icon="sap-icon://thumb-up"/>
+                                        <s:MicroProcessFlowItem state="None" icon="sap-icon://pending"/>
+                                        <s:MicroProcessFlowItem state="None" icon="sap-icon://pending"/>
+                                    </s:content>
+							    </s:MicroProcessFlow>
+                                <ObjectIdentifier
+                                    text="2" />
+                            </cells>
+                        </ColumnListItem>
+                    </items>
+                </Table>
+            </smartTable:SmartTable>
+            </content>
+        </Panel>
     </Page>
 </mvc:View>
